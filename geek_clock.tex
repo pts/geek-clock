@@ -1,0 +1,74 @@
+% geek_clock.tex
+% by pts@fazekas.hu at Thu Oct 22 14:24:35 CEST 2009
+\documentclass[a4paper]{article}
+\usepackage{tikz}
+\usepackage[latin2]{inputenc}
+\usepackage{t1enc}
+\usepackage{lmodern}
+
+\pdfpagewidth=\paperwidth
+\pdfpageheight=\paperheight
+
+\newenvironment{fullpage}{%
+  \shipout\vbox\bgroup\kern-1in\moveleft1in\vbox to\paperheight\bgroup
+  \parindent0pt\hsize\paperwidth
+}{%
+  \vfil\egroup\egroup
+}
+
+\begin{document}
+
+% Define a few constants for easy configuration
+\def\framehalf{9.2cm}
+\def\radius{8.8cm}
+\def\onedegrad{8.6cm}
+\def\fivedegrad{8.5cm}
+\def\tendegrad{8.2cm}
+\def\labelrad{8.3cm}
+
+\begin{fullpage}
+  \vfil\noindent\hfil
+  \begin{tikzpicture}[scale=1]
+    \draw (-\framehalf,-\framehalf) --
+          (\framehalf,-\framehalf) --
+          (\framehalf,\framehalf) --
+          (-\framehalf,\framehalf) -- cycle;
+    \draw (0,0) circle (\framehalf);
+    \draw (0,0) circle (\radius);
+    \draw[fill=black] (0,0) circle (2.5mm);
+    \node[draw, circle, inner sep=.2mm] (a) at (0,0) {};
+    % main lines
+    \foreach \x in {0, 6,...,360}
+        \draw[line width=1.5pt] (\x:\onedegrad) -- (\x:\radius);
+    % labels and longer lines at every 6 degrees
+    \foreach \x in {30, 60, ...,  360} {
+        \draw[line width=4pt] (\x:\tendegrad) -- (\x:\radius);
+    }
+    \node[scale=3,anchor=north east] at (450-1*30:\labelrad)
+      {$B'_L$\kern-1ex};
+    \node[scale=2.5,anchor=east] at (450-2*30:\labelrad)
+      {\lower8ex\hbox{$\displaystyle \sum_{i=0}^{\infty}1/2^i$\kern-2ex}};
+    \node[scale=3,anchor=east] at (450-3*30:\labelrad)
+      {$7\odot-5$};
+    \node[scale=3,anchor=south east] at (450-4*30:\labelrad)
+      {$\lceil\pi\rceil$};
+    \node[scale=3,anchor=south east] at (450-5*30:\labelrad)
+      {$(2\varphi-1)^2$\kern-4ex};
+    \node[scale=3,anchor=south] at (450-6*30:\labelrad)
+      {$3!$};
+    \node[scale=3,anchor=south west] at (450-7*30:\labelrad)
+      {$\!6.\overline{9}$};
+    \node[scale=4,anchor=west] at (450-8*30:\labelrad)
+      {\raise1ex\hbox{${\bullet}{\circ}{\circ}{\circ}$}};
+    \node[scale=2.5,anchor=west] at (450-9*30:\labelrad)
+      {$\lfloor(7\cdot.1\!-\!.7)^{\textrm{-6e-2}}\rfloor$};
+    \node[scale=2.5,anchor=west] at (450-10*30:\labelrad)
+      {\lower6ex\hbox{$\displaystyle{5\choose2}$}};
+    \node[scale=2.5,anchor=north west] at (450-11*30:\labelrad)
+      {\lower3ex\hbox{\kern-3ex$7^5\mathop{\mathrm{mod}} 13$}};
+    \node[scale=3,anchor=north] at (450-12*30:\labelrad)
+      {$\sqrt[3]{1728}$};
+  \end{tikzpicture}
+\end{fullpage}
+
+\end{document}
